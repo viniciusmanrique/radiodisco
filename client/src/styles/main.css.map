@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,IAAI;AACJ,IAAI,CAAC;EACH,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,oBAAoB;EACpB,UAAU,EAAE,UAAU;CACvB;;AACD,AAAA,CAAC;AACD,CAAC,AAAA,OAAO;AACR,CAAC,AAAA,MAAM,CAAC;EACN,UAAU,EAAE,OAAO;CACpB;;ADRD,sCAAsC;AACtC,yCAAyC;AGJzC,4BAA4B;AAO5B,4BAA4B;AAO5B,8DAA8D",
+    "sources": [
+        "main.scss",
+        "partials/base/_reset.scss",
+        "partials/base/_colors.scss",
+        "partials/layout/_breakpoints.scss",
+        "partials/component/_homepage.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}

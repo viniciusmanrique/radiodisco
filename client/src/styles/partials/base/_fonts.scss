@@ -1,0 +1,21 @@
+@font-face {
+  font-family: avenirNextRegular;
+  src: url("../assets/fonts/AvenirNextLTPro-Regular.otf");
+}
+@font-face {
+  font-family: avenirNextDemi;
+  src: url("../assets/fonts/AvenirNextLTPro-Demi.otf");
+}
+@font-face {
+  font-family: avenirNextBold;
+  src: url("../assets/fonts/AvenirNextLTPro-Bold.otf");
+}
+@mixin regular {
+  font-family: avenirNextRegular, Helvetica, Arial, sans-serif;
+}
+@mixin demi {
+  font-family: avenirNextDemi, Helvetica, Arial, sans-serif;
+}
+@mixin bold {
+  font-family: avenirNextBold, Helvetica, Arial, sans-serif;
+}
