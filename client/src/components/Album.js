@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+/* import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; */
+/* import Cors from "cors"; */
 
 export default class Album extends Component {
   state = {
@@ -12,12 +13,22 @@ export default class Album extends Component {
   };
 
   componentDidMount() {
-    const clientId = "e6d20d9a42a74ae5b889bd8ec5d0767f";
-    const spotifyAlbumsCall = `https://api.spotify.com/v1/albums/?ids=6vuykQgDLUCiZ7YggIpLM9,1DBkJIEoeHrTX4WCBQGcCi,7eyQXxuf2nGj9d2367Gi5f,1oW3v5Har9mvXnGk0x4fHm,6V9YnBmFjWmXCBaUVRCVXP,19RUXBFyM4PpmrLRdtqWbp,7dxKtc08dYeRVHt3p9CZJn,500FEaUzn8lN9zWFyZG5C2,6400dnyeDyD2mIFHfkwHXN" -H "Authorization: Bearer {clientId}`;
-
-    const getAllAlbums = axios.get("/api/albums").then(response => {
-      response.data;
-    });
+    /* const clientId = "";
+    const spotifyAlbumsCall = "https://api.spotify.com/v1/albums/?ids=6vuykQgDLUCiZ7YggIpLM9,1DBkJIEoeHrTX4WCBQGcCi,7eyQXxuf2nGj9d2367Gi5f,1oW3v5Har9mvXnGk0x4fHm,6V9YnBmFjWmXCBaUVRCVXP,19RUXBFyM4PpmrLRdtqWbp,7dxKtc08dYeRVHt3p9CZJn,500FEaUzn8lN9zWFyZG5C2,6400dnyeDyD2mIFHfkwHXN" -H "Authorization: Bearer {e6d20d9a42a74ae5b889bd8ec5d0767f}";
+ */
+    axios
+      .get(
+        "https://api.spotify.com/v1/albums/?ids=6vuykQgDLUCiZ7YggIpLM9,1DBkJIEoeHrTX4WCBQGcCi,7eyQXxuf2nGj9d2367Gi5f,1oW3v5Har9mvXnGk0x4fHm,6V9YnBmFjWmXCBaUVRCVXP,19RUXBFyM4PpmrLRdtqWbp,7dxKtc08dYeRVHt3p9CZJn,500FEaUzn8lN9zWFyZG5C2,6400dnyeDyD2mIFHfkwHXN",
+        {
+          Headers: {
+            Authorization: "Bearer {}"
+          }
+        }
+      )
+      .then(response => {
+        let getAllAlbums = response.data;
+        console.log(getAllAlbums);
+      });
   }
 
   /* componentDidMount() {
@@ -64,11 +75,11 @@ export default class Album extends Component {
     }; */
 
   render() {
-    if (this.state.videosArray.length === 0)
-      return <h4 className="loading">Loading</h4>;
+    /* if (this.state.videosArray.length === 0)
+      return <h4 className="loading">Loading</h4>; */
     return (
       <div>
-        <Router>
+        {/* <Router>
           <Switch>
             <Route
               path="/"
@@ -102,7 +113,7 @@ export default class Album extends Component {
               )}
             />
           </Switch>
-        </Router>
+        </Router> */}
       </div>
     );
   }
