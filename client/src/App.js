@@ -1,23 +1,26 @@
 import React from "react";
-import "./styles/main.css";
-/* import { Link } from "react-router-dom"; */
-/* import radioheadLogo from "./assets/logo/radiohead-logo.png"; */
-import Album from "./components/Album";
+import radioheadLogo from "./assets/logo/radiohead-logo.png";
+
 export default function App() {
   return (
-    <div className="App">
+    <div className="homepage">
+      <a
+        className="homepage__button-link"
+        href="http://localhost:5000/auth/spotify/"
+        style={{ color: "white" }}
+      >
+        Albums
+        {/* <button className="homepage__button">Albums</button> */}
+      </a>
+      <h1>DON'T SKIP</h1>
       <div className="homepage__radiohead-logo-wrap">
-        {/* <img
+        <img
           className="homepage__radiohead-logo"
           src={radioheadLogo}
           alt="Arrow button"
-        /> */}
+          style={{ width: 200 }}
+        />
       </div>
-      <h1>DON'T SKIP</h1>
-      <Album />
-      {/* <Link className="" to="/album">
-        <img className="" src={ArrowDown} alt="Arrow button" />
-      </Link> */}
     </div>
   );
 }
