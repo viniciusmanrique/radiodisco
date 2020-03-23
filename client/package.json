@@ -14,7 +14,9 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "spotify-web-api-js": "^1.2.0"
+    "react-spotify-api": "^2.6.0",
+    "spotify-web-api-js": "^1.2.0",
+    "use-api-request": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

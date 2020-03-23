@@ -26,6 +26,7 @@
     "morgan": "^1.9.1",
     "passport": "^0.4.1",
     "passport-spotify": "^1.1.0",
+    "qs": "^6.9.1",
     "spotify-web-api-js": "^1.2.0"
   },
   "devDependencies": {

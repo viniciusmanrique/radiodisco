@@ -1,7 +1,7 @@
 const express = require("express");
 
 const axios = require("axios");
-/* const request = require("request"); */
+const qs = require("qs");
 
 const querystring = require("querystring");
 
@@ -16,7 +16,7 @@ const logger = require("morgan");
 
 // init the express app
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 // .env file with keys/secrets
 require("dotenv").config();
@@ -34,14 +34,8 @@ app.use(
   })
 );
 
-/* // keys/secrets
-const clientID = process.env.CLIENT_ID;
-const clientSecret = process.env.CLIENT_SECRET;
-const callbackURL = process.env.CALLBACK_URL; */
-
-//________________________________________________________________________________________________________
-
-let redirect_uri = process.env.CALLBACK_URL;
+let redirect_uri =
+  process.env.CALLBACK_URL || "http://localhost:5000/callback/";
 
 app.get("/auth/spotify", function(req, res) {
   res.redirect(
@@ -55,28 +49,29 @@ app.get("/auth/spotify", function(req, res) {
   );
 });
 
-app.get(process.env.CALLBACK_URL, function(req, res) {
+app.get("/callback", function(req, res) {
   let code = req.query.code || null;
   let authOptions = {
     url: "https://accounts.spotify.com/api/token",
     form: {
       code: code,
-      redirect_uri,
+      redirect_uri: redirect_uri,
       grant_type: "authorization_code"
     },
     headers: {
       Authorization:
         "Basic " +
-        new Buffer(
+        Buffer.from(
           process.env.CLIENT_ID + ":" + process.env.CLIENT_SECRET
         ).toString("base64")
     },
     json: true
   };
+
   axios.post(authOptions, function(error, response, body) {
     var access_token = body.access_token;
-    let uri = process.env.CALLBACK_URL || "http://localhost:3000/callback/";
-    response.redirect(uri + "?access_token=" + access_token);
+    let uri = process.env.FRONTEND_URI || "http://localhost:3000/";
+    res.redirect(uri + "?access_token=" + access_token);
   });
 });
 
@@ -85,6 +80,6 @@ const albums = require("./routes/api/albums");
 app.use("/api/albums", albums);
 
 // Listening on port:
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`server is running on port ${port}`);
 });
