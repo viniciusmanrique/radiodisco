@@ -4,15 +4,12 @@ const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 
-// add http headers
-const helmet = require("helmet");
+const helmet = require("helmet"); // add http headers
+const logger = require("morgan"); // logs http requests
 
-// logs http requests
-const logger = require("morgan");
+const port = process.env.PORT || 5000;
 
-// .env file with keys/secrets
-require("dotenv").config();
-
+require("dotenv").config(); // .env file with keys/secrets
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.CALLBACK_URL;
@@ -36,14 +33,16 @@ const generateRandomString = function(length) {
 const stateKey = "spotify_auth_state";
 
 const app = express();
-const port = process.env.PORT || 5000;
+
+const albums = require("./routes/api/albums"); // Albums route
 
 app
   .use(express.static(__dirname + "/public"))
   .use(logger("dev"))
   .use(helmet())
   .use(cors())
-  .use(cookieParser());
+  .use(cookieParser())
+  .use("/api/albums", albums);
 
 app.get("/auth/spotify", function(req, res) {
   let state = generateRandomString(16);
@@ -143,10 +142,6 @@ app.get("/refresh_token", function(req, res) {
       console.error(e.response.data);
     });
 });
-
-// Albums route
-const albums = require("./routes/api/albums");
-app.use("/api/albums", albums);
 
 // Listening on port:
 app.listen(port, () => {
