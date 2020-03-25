@@ -5,6 +5,7 @@ import "./styles/main.css";
 import App from "./App";
 import Albums from "./components/Albums";
 import Biography from "./components/Biography";
+import Benefits from "./components/Benefits";
 import Credits from "./components/Credits";
 
 const routing = (
@@ -12,8 +13,10 @@ const routing = (
     <Router>
       <Switch>
         <Route path="/" exact component={App} />
-        <Route path="/albums" component={Albums} />
+        <Route path="/albums" exact component={Albums} />
+        <Route path="/albums/:id" component={Albums} />
         <Route path="/biography" component={Biography} />
+        <Route path="/benefits" component={Benefits} />
         <Route path="/credits" component={Credits} />
       </Switch>
     </Router>
