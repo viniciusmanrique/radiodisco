@@ -35,6 +35,7 @@ const stateKey = "spotify_auth_state";
 const app = express();
 
 const albums = require("./routes/api/albums"); // Albums route
+const wiki = require("./routes/api/wiki"); // Wiki route
 
 app
   .use(express.static(__dirname + "/public"))
@@ -42,7 +43,16 @@ app
   .use(helmet())
   .use(cors())
   .use(cookieParser())
-  .use("/api/albums", albums);
+  .use("/api/albums", albums)
+  .use("/api/wiki", wiki)
+  .use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  });
 
 app.get("/auth/spotify", function(req, res) {
   let state = generateRandomString(16);

@@ -1,41 +1,38 @@
 @mixin headings($size, $line) {
   font-size: $size;
   line-height: $line;
-  /* -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; */
 }
 body {
-  @include bold;
-  color: $black;
+  @include light;
+  color: white;
 }
 /* Header */
 h1 {
-  @include headings(36px, 44px);
-}
-/* Hero Header */
-.hero__title h1 {
-  @include headings(60px, 68px);
-  color: $white;
+  @include headings(2rem, 2rem);
+  @include title;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 /* Header */
 h2 {
-  @include headings(24px, 32px);
+  @include headings(2rem, 1.6rem);
+  @include bold;
 }
 /* Subheader */
 h3 {
-  @include headings(16px, 24px);
+  @include headings(1.6rem, 1.2rem);
   @include bold;
 }
 /* Paragraph & comments */
 h4 {
-  @include headings(14px, 22px);
-  @include regular;
+  @include headings(1.6rem, 1.2rem);
+  @include light;
 }
 h5 {
-  @include headings(12px, 20px);
-  @include demi;
-  color: $silver;
+  @include headings(1.2rem, 0.8rem);
+  @include light;
 }
 p {
-  @include regular;
+  @include headings(0.8rem, 1.1rem);
+  @include light;
 }

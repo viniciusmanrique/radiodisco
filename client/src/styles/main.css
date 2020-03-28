@@ -1,6 +1,6 @@
 html,
 body {
-  background-color: black;
+  background-color: #161616;
   color: white;
   margin: 0;
   padding: 0;
@@ -16,9 +16,214 @@ body {
           box-sizing: inherit;
 }
 
-/* @import "./partials/base/fonts"; */
-/* @import "./partials/base/headings"; */
+@font-face {
+  font-family: bdPlakatt;
+  src: url("../assets/fonts/bdplakatbau.ttf");
+}
+
+@font-face {
+  font-family: overpassMonoBold;
+  src: url("../assets/fonts/overpass-mono-bold.ttf");
+}
+
+@font-face {
+  font-family: overpassMonoLight;
+  src: url("../assets/fonts/overpass-mono-light.ttf");
+}
+
+body {
+  font-family: overpassMonoLight, Helvetica, Arial, sans-serif;
+  color: white;
+}
+
+/* Header */
+h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  /* @import url("https://use.typekit.net/vdl7wew.css");
+  font-family: bd-palaktbau, sans-serif; */
+  font-family: bdPlakatt, Helvetica, Arial, sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* Header */
+h2 {
+  font-size: 2rem;
+  line-height: 1.6rem;
+  font-family: overpassMonoBold, Helvetica, Arial, sans-serif;
+}
+
+/* Subheader */
+h3 {
+  font-size: 1.6rem;
+  line-height: 1.2rem;
+  font-family: overpassMonoBold, Helvetica, Arial, sans-serif;
+}
+
+/* Paragraph & comments */
+h4 {
+  font-size: 1.6rem;
+  line-height: 1.2rem;
+  font-family: overpassMonoLight, Helvetica, Arial, sans-serif;
+}
+
+h5 {
+  font-size: 1.2rem;
+  line-height: 0.8rem;
+  font-family: overpassMonoLight, Helvetica, Arial, sans-serif;
+}
+
+p {
+  font-size: 0.8rem;
+  line-height: 1.1rem;
+  font-family: overpassMonoLight, Helvetica, Arial, sans-serif;
+}
+
 /* media query for mobile */
 /* media query for tablet */
 /* media query for landscape, medium pixel density desktops */
+/* Mobile First */
+.homepage {
+  margin: 2rem;
+  position: relative;
+  z-index: 3;
+}
+
+.homepage__title {
+  font-size: 4rem;
+  line-height: 0rem;
+  text-align: center;
+}
+
+.homepage__subtitle {
+  font-size: 1.4rem;
+  line-height: 0rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  margin: 0 0 2.4rem 0;
+}
+
+.homepage__button-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2rem 0;
+}
+
+.homepage__button {
+  background-color: #1db954;
+  color: white;
+  font-size: 0.8rem;
+  line-height: 1.6rem;
+  font-family: overpassMonoBold, Helvetica, Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  border-radius: 50px;
+  border: 0;
+  padding: 1rem 1.8rem;
+  margin: 0 auto;
+}
+
+.homepage__button:hover {
+  opacity: 0.9;
+  background-color: #4bdf80;
+}
+
+.homepage__dont-skip {
+  font-size: 2rem;
+  line-height: 1rem;
+  text-align: center;
+  letter-spacing: 4px;
+  color: darkred;
+  opacity: 0.3;
+  z-index: -3;
+}
+
+.homepage__demon-logo {
+  position: absolute;
+  top: -20vh;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+/* Tablet */
+/* @include medium {
+  .homepage {
+    
+  }
+} */
+/* Desktop */
+/* @include large {
+  .homepage {
+
+  }
+} */
+.albums {
+  margin: 0.5rem;
+  /* &__image-wrap {
+    width: 30%;
+  } */
+}
+
+.albums__menu {
+  width: 100vw;
+}
+
+.albums__menu-item-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.albums__item-link {
+  width: 30%;
+  margin: 0 0.2rem;
+}
+
+.albums__image {
+  width: 100%;
+}
+
+/* Tablet */
+/* @include medium {
+      .albums {
+        
+      }
+    } */
+/* Desktop */
+/* @include large {
+      .albums {
+    
+      }
+    } */
+/* Mobile First */
+.album__cover {
+  width: 100vw;
+  text-align: center;
+}
+
+.album__title {
+  font-size: 4rem;
+  line-height: 0rem;
+}
+
+/* Tablet */
+/* @include medium {
+      .album {
+        
+      }
+    } */
+/* Desktop */
+/* @include large {
+      .album {
+    
+      }
+    } */
+/* Mobile First */
 /*# sourceMappingURL=main.css.map */

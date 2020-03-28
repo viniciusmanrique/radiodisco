@@ -1,14 +1,48 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default function Back() {
-  return (
-    <div>
-      <Link to={`/albums/`}>
-        <h1>Back</h1>
-      </Link>
-    </div>
-  );
+export default class Back extends Component {
+  /* state = {
+    albumId: this.props.match.params.id
+  }; */
+  /* componentDidMount() {
+    this.props.setAlbumId(this.props.match.params.id);
+  } */
+
+  componentDidUpdate() {
+    /* if (props.match.params.id !== this.props.match.params.id) {
+      this.props.setAlbumId(this.props.match.params.id);
+    }
+    window.scrollTo(0, 0); */
+    /* handleClick = () => {
+      this.setState({
+        AlbumId: null
+      });
+    }; */
+  }
+
+  render() {
+    const path = null;
+    return (
+      <div>
+        <Link
+          to={{
+            pathname: "/albums",
+            state: {
+              albumId: null
+            }
+          }}
+        >
+          <h1>Back</h1>
+        </Link>
+      </div>
+    );
+  }
 }
 
-/* return <Route path="/albums" exact component={Albums} />; */
+/* to={{
+    pathname: "/biography",
+    state: {
+      image: this.state.radioPhoto
+    }
+  }} */

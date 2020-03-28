@@ -1,0 +1,34 @@
+.albums {
+  margin: 0.5rem;
+  &__menu {
+    width: 100vw;
+  }
+  &__menu-item-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__item-link {
+    width: 30%;
+    margin: 0 0.2rem;
+  }
+  /* &__image-wrap {
+    width: 30%;
+  } */
+  &__image {
+    width: 100%;
+  }
+}
+
+/* Tablet */
+/* @include medium {
+      .albums {
+        
+      }
+    } */
+
+/* Desktop */
+/* @include large {
+      .albums {
+    
+      }
+    } */

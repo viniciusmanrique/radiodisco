@@ -1,0 +1,25 @@
+/* Mobile First */
+.album {
+  &__cover {
+    width: 100vw;
+    text-align: center;
+  }
+  &__title {
+    @include headings(4rem, 0rem);
+  }
+}
+
+/* Tablet */
+/* @include medium {
+      .album {
+        
+      }
+    } */
+
+/* Desktop */
+/* @include large {
+      .album {
+    
+      }
+    } */
+/* Mobile First */

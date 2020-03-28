@@ -1,21 +1,23 @@
 @font-face {
-  font-family: avenirNextRegular;
-  src: url("../assets/fonts/AvenirNextLTPro-Regular.otf");
+  font-family: bdPlakatt;
+  src: url("../assets/fonts/bdplakatbau.ttf");
 }
 @font-face {
-  font-family: avenirNextDemi;
-  src: url("../assets/fonts/AvenirNextLTPro-Demi.otf");
+  font-family: overpassMonoBold;
+  src: url("../assets/fonts/overpass-mono-bold.ttf");
 }
 @font-face {
-  font-family: avenirNextBold;
-  src: url("../assets/fonts/AvenirNextLTPro-Bold.otf");
+  font-family: overpassMonoLight;
+  src: url("../assets/fonts/overpass-mono-light.ttf");
 }
-@mixin regular {
-  font-family: avenirNextRegular, Helvetica, Arial, sans-serif;
-}
-@mixin demi {
-  font-family: avenirNextDemi, Helvetica, Arial, sans-serif;
+@mixin title {
+  /* @import url("https://use.typekit.net/vdl7wew.css");
+  font-family: bd-palaktbau, sans-serif; */
+  font-family: bdPlakatt, Helvetica, Arial, sans-serif;
 }
 @mixin bold {
-  font-family: avenirNextBold, Helvetica, Arial, sans-serif;
+  font-family: overpassMonoBold, Helvetica, Arial, sans-serif;
+}
+@mixin light {
+  font-family: overpassMonoLight, Helvetica, Arial, sans-serif;
 }

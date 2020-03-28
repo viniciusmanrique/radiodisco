@@ -1,33 +1,17 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import queryString from "query-string";
-import Back from "./Back";
-
-/* import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; */
-/* import Cors from "cors"; */
-
-const Album = props => {
-  return (
-    <div>
-      <h1>Album</h1>
-      <p>{props.albumId}</p>
-      {/* <Back /> */}
-      <Link to={`/albums/`}>
-        <h1>Back</h1>
-      </Link>
-    </div>
-  );
-};
+import Album from "./Album";
 
 export default class Albums extends Component {
   state = {
-    albumId: null,
+    albumId: "menu",
     albumCover: [],
     selectedAlbum: [],
     albumsSpotify: [],
-    albumWikiInfo: [],
-    albumGeniusLyrics: []
+    albumGeniusLyrics: [],
+    radioPhoto: null
   };
 
   componentDidMount() {
@@ -38,14 +22,14 @@ export default class Albums extends Component {
 
     /* if (!accessToken) return; */
 
-    // Gets all album covers as well the Spotify IDs
-    axios.get("/api/albums").then(response => {
-      let getAllCovers = response.data;
-      console.log(getAllCovers);
-      this.setState({
-        albumCover: getAllCovers
-      });
-    });
+    // Gets all album covers, Spotify IDs
+    axios
+      .get("/api/albums")
+      .then(res => {
+        this.setState({ albumCover: res.data });
+        console.log(this.state.albumCover);
+      })
+      .catch(err => console.log(err));
 
     // Gets all album's info from Spotify
     axios
@@ -62,26 +46,68 @@ export default class Albums extends Component {
           albumsSpotify: getAllAlbums
         });
       });
+
+    axios
+      .get("https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb", {
+        headers: { Authorization: "Bearer " + accessToken }
+      })
+      .then(res => {
+        this.setState({ radioPhoto: res.data.images[0].url });
+        console.log(this.state.radioPhoto);
+      });
+
+    axios
+      .put(
+        "https://api.spotify.com/v1/me/player/play",
+        { context_uri: `spotify:album:6vuykQgDLUCiZ7YggIpLM9` },
+        {
+          headers: { Authorization: "Bearer " + accessToken },
+          accept: "application/json",
+          contentType: "application/json"
+        }
+      )
+      .then(res => {
+        this.setState({ radioPhoto: res.data.images[0].url });
+        console.log(this.state.radioPhoto);
+      });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.setState({
         albumId: this.props.match.params.id
       });
-    } else if (this.props.match.params.id === undefined) {
-      console.log("URL has no Id");
-    }
+    } /* else if (prevState.albumId !== this.state.albumId) {
+      console.log("set null");
+      this.setState({
+        AlbumId: null
+      });
+    } */
+
     window.scrollTo(0, 0);
     console.log("Did update");
     console.log(this.state.albumId);
   }
 
+  setAlbumId = () => {
+    console.log("set");
+    this.setState({
+      AlbumId: "menu"
+    });
+  };
+
   render() {
-    if (this.state.albumId !== null)
+    if (this.state.albumId !== "menu")
       return (
         <div>
-          <Album albumId={this.state.albumId} />
+          <Album
+            albumId={this.state.albumId}
+            albumCover={this.state.albumCover}
+            onClick={this.setAlbumId}
+          />
+          <Link to={"/albums/menu"}>
+            <h1>Back</h1>
+          </Link>
         </div>
       );
 
@@ -95,15 +121,12 @@ export default class Albums extends Component {
           key={index}
           className="albums__item-link"
         >
-          <div className="albums__item">
-            <div className="albums__image-wrap">
-              <img
-                className="albums__image"
-                src={listData.thumb}
-                alt="Album Cover"
-                style={{ width: "30%" }}
-              ></img>
-            </div>
+          <div className="albums__image-wrap">
+            <img
+              className="albums__image"
+              src={listData.thumb}
+              alt="Album Cover"
+            ></img>
           </div>
         </Link>
       );
@@ -111,35 +134,28 @@ export default class Albums extends Component {
 
     return (
       <div className="albums">
-        <section className="albums__menu" style={{ display: "flex" }}>
-          <div className="albums__menu-item-wrap" style={{ flexWrap: "wrap" }}>
-            {coversMenu}
-          </div>
+        <section className="albums__menu">
+          <div className="albums__menu-item-wrap">{coversMenu}</div>
         </section>
-
         <Link
-          to={`/biography/`}
           className="albums__menu-link-wrap"
-          style={{ color: "white" }}
+          to={{
+            pathname: "/biography",
+            state: {
+              image: this.state.radioPhoto
+            }
+          }}
         >
           <div className="albums__menu-link-wrap">
             <h1 className="albums__menu-link">Biography</h1>
           </div>
         </Link>
-        <Link
-          to={`/benefits/`}
-          className="albums__menu-link-wrap"
-          style={{ color: "white" }}
-        >
+        <Link to={`/benefits/`} className="albums__menu-link-wrap">
           <div className="albums__menu-link-wrap">
             <h1 className="albums__menu-link">Benefits</h1>
           </div>
         </Link>
-        <Link
-          to={`/credits/`}
-          className="albums__menu-link-wrap"
-          style={{ color: "white" }}
-        >
+        <Link to={`/credits/`} className="albums__menu-link-wrap">
           <div className="albums__menu-link-wrap">
             <h1 className="albums__menu-link">Credits</h1>
           </div>
