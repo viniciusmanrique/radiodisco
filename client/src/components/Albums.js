@@ -3,20 +3,28 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import queryString from "query-string";
 import Album from "./Album";
+import Player from "./Player";
 
 export default class Albums extends Component {
   state = {
     accessToken: null,
     albumId: "menu",
     playAlbumId: null,
-    item: null,
-    is_playing: null,
-    progress_ms: null,
     albumCover: [],
     selectedAlbum: [],
     albumsSpotify: [],
     albumGeniusLyrics: [],
-    radioPhoto: null
+    radioPhoto: null,
+    item: {
+      album: {
+        images: [{ url: "" }]
+      },
+      name: "",
+      artists: [{ name: "" }],
+      duration_ms: 0
+    },
+    is_playing: "Paused",
+    progress_ms: 0
   };
 
   playAlbum = () => {
@@ -31,22 +39,13 @@ export default class Albums extends Component {
 
     /* if (this.state.playAlbumId !== null) {} */
 
-    /* axios.put(
-      "https://api.spotify.com/v1/me/player/play",
-      { context_uri: `spotify:album:6vuykQgDLUCiZ7YggIpLM9` },
-      {
-        headers: { Authorization: "Bearer " + accessToken },
-        accept: "application/json",
-        contentType: "application/json"
-      }
-    ); */
+    axios.defaults.headers.common = { Authorization: "Bearer " + accessToken };
 
     axios
       .put(
         "https://api.spotify.com/v1/me/player/play",
         { context_uri: `spotify:album:6vuykQgDLUCiZ7YggIpLM9` },
         {
-          headers: { Authorization: "Bearer " + accessToken },
           accept: "application/json",
           contentType: "application/json"
         }
@@ -54,6 +53,17 @@ export default class Albums extends Component {
       .then(res => {
         const data = res.data;
         console.log(data);
+      })
+      .catch(err => console.log(err));
+
+    axios
+      .get("https://api.spotify.com/v1/me/player", {
+        accept: "application/json",
+        contentType: "application/json"
+      })
+      .then(res => {
+        const data = res.data;
+
         this.setState({
           item: data.item,
           is_playing: data.is_playing,
@@ -70,7 +80,6 @@ export default class Albums extends Component {
     let parsed = queryString.parse(window.location.pathname);
     let accessToken = parsed["/albums/access_token"];
     this.setState({ accessToken: accessToken });
-    console.log(this.state.accessToken);
 
     /* let refreshToken = parsed.refresh_token; */
 
@@ -86,6 +95,7 @@ export default class Albums extends Component {
       .catch(err => console.log(err));
 
     axios.defaults.headers.common = { Authorization: "Bearer " + accessToken };
+
     // Gets all album's info from Spotify
     axios
       .get(
@@ -109,6 +119,7 @@ export default class Albums extends Component {
       })
       .catch(err => console.log(err));
 
+    // Plays the album
     /* axios
       .put(
         "https://api.spotify.com/v1/me/player/play",
@@ -140,18 +151,7 @@ export default class Albums extends Component {
         contentType: "application/json"
       }
     ); */
-
-    /* if (this.state.albumId !== null) {
-      axios.put(
-        "https://api.spotify.com/v1/me/player/play",
-        { context_uri: `spotify:${this.state.albumId}` },
-        {
-          headers: { Authorization: "Bearer " + accessToken },
-          accept: "application/json",
-          contentType: "application/json"
-        }
-      );
-    } */
+    console.log(this.state.accessToken);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -185,6 +185,11 @@ export default class Albums extends Component {
           <Album
             albumId={this.state.albumId}
             albumCover={this.state.albumCover}
+          />
+          <Player
+            item={this.state.item}
+            is_playing={this.state.is_playing}
+            progress_ms={this.progress_ms}
           />
           <Link to={"/albums/menu"}>
             <h1>Back</h1>
